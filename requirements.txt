@@ -1,0 +1,6 @@
+python-telegram-bot
+python-dotenv
+aiosqlite
+httpx
+streamlit
+pandas
