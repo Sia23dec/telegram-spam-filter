@@ -1,4 +1,4 @@
-# 🛡️ Telegram Spam Filter Bot
+#  Telegram Spam Filter Bot
 
 > **Advanced spam detection and moderation for Telegram groups with real-time analytics dashboard**
 
@@ -6,7 +6,7 @@ A production-ready Telegram Bot API project that detects and moderates spam in g
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -23,46 +23,46 @@ A production-ready Telegram Bot API project that detects and moderates spam in g
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🎯 Intelligent Spam Detection
+###  Intelligent Spam Detection
 - **Rule-based Scoring System**: Multi-layered detection using weighted rules
-  - 🔗 Suspicious link detection
-  - 🔄 Message repetition & flood detection
-  - 🔤 Spam keyword matching
-  - 🌐 Unicode trick detection (homoglyph attacks)
-  - 👤 User profile analysis (new accounts, default photos)
+  -  Suspicious link detection
+  -  Message repetition & flood detection
+  -  Spam keyword matching
+  -  Unicode trick detection (homoglyph attacks)
+  -  User profile analysis (new accounts, default photos)
   
-### 🛡️ Moderation Actions
-- ✅ **Automatic message deletion**
-- ⚠️ **User warnings with escalation**
-- 🤐 **Temporary muting**
-- 🚫 **User banning with global blacklist integration**
-- 📝 **Admin logging to private channel**
+###  Moderation Actions
+-  **Automatic message deletion**
+-  **User warnings with escalation**
+-  **Temporary muting**
+-  **User banning with global blacklist integration**
+-  **Admin logging to private channel**
 
-### 🤖 User Verification
+###  User Verification
 - **CAPTCHA-style verification** for new members (button click)
 - Prevents bot spam and new account abuse
 - Automatic member unmute after verification
 
-### 🗄️ Database & Tracking
+###  Database & Tracking
 - SQLite database for warning history
 - User spam score persistence
 - Admin commands for warning management
 
-### 📊 Real-time Analytics Dashboard
+###  Real-time Analytics Dashboard
 - **Live visualization** of moderation activity
 - **Interactive charts** showing top spammers
 - **Spam metrics** and statistics
 - Built with **Streamlit** for easy deployment
 
-### 🌐 Global Security
+###  Global Security
 - CAS (Combot Anti-Spam) integration for global blacklist checks
 - Automatic banning of known global spammers
 
 ---
 
-## 💻 Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
@@ -75,7 +75,7 @@ A production-ready Telegram Bot API project that detects and moderates spam in g
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────┐
@@ -157,7 +157,7 @@ A production-ready Telegram Bot API project that detects and moderates spam in g
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.8+
@@ -197,10 +197,10 @@ nano .env  # Edit with your settings
    - Open your group
    - Add the bot as a member
    - Promote to admin with these permissions:
-     - ✅ Delete messages
-     - ✅ Restrict members (mute/ban)
-     - ✅ Manage video chats
-     - ✅ Manage topics
+     -  Delete messages
+     -  Restrict members (mute/ban)
+     -  Manage video chats
+     -  Manage topics
 
 3. **(Optional) Create logging channel**:
    - Create a private channel: "Bot Logs"
@@ -278,7 +278,7 @@ FLOOD_THRESHOLD=5
 
 ---
 
-## 📊 Dashboard Analytics
+##  Dashboard Analytics
 
 ### Launch Dashboard
 ```bash
@@ -290,24 +290,24 @@ Then open: **http://localhost:8501**
 ### Key Metrics
 
 ```
-📈 Total Spam Messages Blocked: 247
-🚫 Unique Spammers Detected: 18
-⚠️ Active Warnings: 7
+ Total Spam Messages Blocked: 247
+ Unique Spammers Detected: 18
+ Active Warnings: 7
 ```
 
 ### Visualizations
 
-**📊 Bar Chart - Top Spammers**
+** Bar Chart - Top Spammers**
 - Shows warning count per user
 - Identifies repeat offenders
 - Helps with manual review
 
-**📋 Data Table - Full Warnings Log**
+** Data Table - Full Warnings Log**
 - User ID, warning count, timestamps
 - Exportable for records/moderation reviews
 - Sortable and filterable
 
-**🎯 Distribution Charts**
+** Distribution Charts**
 - Spam type breakdown (links, flood, keywords)
 - Time-based trends
 - Action effectiveness
@@ -317,7 +317,7 @@ Dashboard automatically refreshes every 5 seconds to show latest moderation acti
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 telegram-spam-filter/
@@ -352,7 +352,7 @@ telegram-spam-filter/
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 ### Message Flow
 
@@ -407,16 +407,16 @@ Result: ALLOWED (score below threshold)
 
 ---
 
-## 🚨 Advanced Features
+##  Advanced Features
 
 ### 1. User Verification (CAPTCHA)
 
 New members are muted and shown a button:
 
 ```
-📱 Message to new member:
+ Message to new member:
 "Welcome John! Click below to verify."
-[I am human ✅]
+[I am human ]
 ```
 
 After clicking → Automatically unmuted
@@ -427,7 +427,7 @@ After clicking → Automatically unmuted
 ```
 /unwarn
 ```
-Response: ✅ Warnings reset for user.
+Response:  Warnings reset for user.
 
 ### 3. Profile Scoring
 
@@ -457,7 +457,7 @@ Score: 8.5
 
 ---
 
-## 🔒 Security & Privacy
+##  Security & Privacy
 
 ### What We Collect
 - User ID, username, warning count (moderation history only)
@@ -482,7 +482,7 @@ See `/docs/THREAT_MODEL.md` for detailed security analysis.
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Bot Not Responding
 
@@ -547,7 +547,7 @@ Typical behavior on a 5,000-member group:
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions welcome! Areas for improvement:
 - [ ] Machine learning model for better detection
@@ -559,30 +559,30 @@ Contributions welcome! Areas for improvement:
 
 ---
 
-## 📝 License
+##  License
 
 MIT License - See LICENSE file for details
 
 ---
 
-## 🙏 Credits
+##  Credits
 
 - **python-telegram-bot** - Official Telegram API wrapper
 - **Streamlit** - Analytics dashboard framework
 - **CAS (Combot Anti-Spam)** - Global spam database
-- Built with ❤️ for safer Telegram communities
+- Built with  for safer Telegram communities
 
 ---
 
-## 📞 Support
+##  Support
 
-- 📖 [Documentation](/docs)
-- 🐛 [Report Issues](https://github.com/Sia23dec/telegram-spam-filter/issues)
-- 💬 [Discussions](https://github.com/Sia23dec/telegram-spam-filter/discussions)
-- 📧 Contact: Check GitHub profile
+-  [Documentation](/docs)
+-  [Report Issues](https://github.com/Sia23dec/telegram-spam-filter/issues)
+-  [Discussions](https://github.com/Sia23dec/telegram-spam-filter/discussions)
+-  Contact: Check GitHub profile
 
 ---
 
 **Last Updated**: 2026-04-22 07:29:24
 **Version**: 2.0.0  
-**Status**: Active & Maintained ✅
+**Status**: Active & Maintained 
