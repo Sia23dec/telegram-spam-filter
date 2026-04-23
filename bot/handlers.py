@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from .actions import warn_user, delete_message, mute_user, ban_user, log_to_admin
 from .filters import score_message
 from .config import Settings
-from .database import increment_warning, reset_warnings
+from .database import increment_warning, reset_warnings, log_moderation_event
 from .services.user_check import get_profile_spam_score
 
 # In-memory storage for anti-flood (clears on restart)
@@ -70,6 +70,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     user_message_stats[u_id] = user_stats
     
     if len(user_stats) > settings.flood_threshold:
+        await log_moderation_event(
+            user_id=u_id,
+            chat_id=message.chat_id,
+            message_text=text[:500] if (text := (message.text or message.caption or "")) else "",
+            base_score=0,
+            profile_score=0,
+            final_score=0,
+            reasons=["flood threshold exceeded"],
+            action_taken="deleted_flood",
+        )
         await delete_message(message)
         await log_to_admin(context, f"User {u_id} flagged for FLOODING.")
         return
@@ -86,20 +96,46 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         return
 
     # 3. ACTIONS & DB ESCALATION
-    await delete_message(message)
-    
     if settings.warn_only:
-        await warn_user(message, result.reasons)
+        await log_moderation_event(
+            user_id=u_id,
+            chat_id=message.chat_id,
+            message_text=text[:500],
+            base_score=result.score,
+            profile_score=profile_score,
+            final_score=final_score,
+            reasons=result.reasons,
+            action_taken="warning_only",
+        )
+        await warn_user(message, result.reasons, final_score=final_score)
         return
 
     count = await increment_warning(u_id)
+    action_taken = "warn_and_mute"
+    if count >= settings.max_warnings:
+        action_taken = "delete_and_ban"
+
+    await log_moderation_event(
+        user_id=u_id,
+        chat_id=message.chat_id,
+        message_text=text[:500],
+        base_score=result.score,
+        profile_score=profile_score,
+        final_score=final_score,
+        reasons=result.reasons,
+        action_taken=action_taken,
+    )
     await log_to_admin(context, f"Spam detected from {u_id}. Score: {final_score}. Warnings: {count}")
 
     if count >= settings.max_warnings:
+        await delete_message(message)
         await ban_user(message)
-        await message.reply_text("⛔ User banned for repeated spamming.")
+        await message.chat.send_message(
+            f"⛔ User banned for repeated spamming.\nScore: {final_score}\nReasons: {', '.join(result.reasons) if result.reasons else 'spam signal'}"
+        )
     else:
-        await warn_user(message, result.reasons, count)
+        await warn_user(message, result.reasons, count, final_score=final_score)
+        await delete_message(message)
         await mute_user(message)
 
 # ADMIN COMMANDS

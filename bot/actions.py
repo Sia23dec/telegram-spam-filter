@@ -2,10 +2,12 @@ from datetime import timedelta, datetime, timezone
 from telegram import ChatPermissions, Update
 from telegram.ext import ContextTypes
 
-async def warn_user(message, reasons: list[str], count: int = 0) -> None:
+async def warn_user(message, reasons: list[str], count: int = 0, final_score: int | None = None) -> None:
     reason_text = ", ".join(reasons) if reasons else "spam signal"
-    await message.reply_text(
-        f"⚠️ Warning {count}: Your message looks like spam ({reason_text})."
+    label = f"Warning {count}" if count else "Warning"
+    score_text = f"\nScore: {final_score}" if final_score is not None else ""
+    await message.chat.send_message(
+        f"⚠️ {label}: Message looks like spam ({reason_text}).{score_text}"
     )
 
 async def delete_message(message) -> None:
