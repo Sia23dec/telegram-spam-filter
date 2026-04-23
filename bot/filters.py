@@ -1,9 +1,9 @@
 import re
 from dataclasses import dataclass
 
-# Expanded URL Regex to catch redirection services
+# Expanded URL  to catch redirection services
 URL_RE = re.compile(r"https?://|t\.me/|bit\.ly/|tinyurl\.com|cutt\.ly|ow\.ly|is\.gd|buff\.ly", re.IGNORECASE)
-# Regex for file-sharing patterns (Piracy)
+#  for file-sharing patterns (Piracy)
 FILE_RE = re.compile(r"\.(pdf|epub|mobi|zip|rar|exe|dmg|apk)$", re.IGNORECASE)
 REPEAT_CHAR_RE = re.compile(r"(.)\1{6,}")
 ZALGO_RE = re.compile(r"[\u0300-\u036f]{3,}")
@@ -19,10 +19,10 @@ PIRACY_KEYWORDS = {
     "free pdf", "premium free", "leaked"
 }
 
-# Add local slangs or rude words here
+
 TOXIC_KEYWORDS = {
     "shut up", "idiot", "stupid", "dumb", "trash", "hate you", "loser", 
-    "kill yourself", "kys", "motherfucker" # Add more college-specific slangs
+    "kill yourself", "kys" # Add more college-specific slangs
 }
 
 @dataclass
